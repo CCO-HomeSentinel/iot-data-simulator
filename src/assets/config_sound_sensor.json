@@ -1,0 +1,22 @@
+{
+    "room_type_probabilities": {
+        "Sala de Estar": 15,
+        "Cozinha": 25,
+        "Quarto": 5,
+        "Banheiro": 0,
+        "Lavanderia": -5,
+        "Escritório": 5,
+        "Garagem": -10,
+        "Hall de Entrada": 0,
+        "Varanda": 5,
+        "Despensa": -10,
+        "Sótão": -20,
+        "Sala de Jantar": 10
+    },
+    "time_probabilities": {
+        "madrugada": 0.001,
+        "manha": 0.8,
+        "tarde": 0.9,
+        "noite": 0.05
+    }
+}

@@ -1,0 +1,6 @@
+{
+    "region_probabilities": {
+        "metropolises": 0.0000001,
+        "rural": 0.00000005
+    }
+}

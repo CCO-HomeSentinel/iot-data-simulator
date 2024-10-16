@@ -1,0 +1,31 @@
+{
+    "region_probabilities": {
+        "metropolises": 0.005,
+        "rural": 0.001
+    },
+    "residence_type_probabilities": {
+        "Casa": 0.005,
+        "Apartamento": 0.005,
+        "Chácara": 0.001
+    },
+    "room_type_probabilities": {
+        "Sala de Estar": 0.005,
+        "Sala de Jantar": 0.005,
+        "Cozinha": 0.005,
+        "Quarto": 0.005,
+        "Banheiro": 0.001,
+        "Lavanderia": 0.001,
+        "Escritório": 0.001,
+        "Garagem": 0.001,
+        "Hall de Entrada": 0.005,
+        "Varanda": 0.001,
+        "Despensa": 0.001,
+        "Sótão": 0.001
+    },
+    "time_probabilities": {
+        "madrugada": -0.01499999,
+        "manha": 0.008,
+        "tarde": 0.005,
+        "noite": 0.008
+    }
+}
