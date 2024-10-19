@@ -34,7 +34,7 @@ class Database:
         self.conn.commit()
         cursor.close()
 
-    def search(self, table_name, columns="*", where=None, where_params=None, join=None):
+    def search(self, table_name, columns="*", where=None, where_params=None, join=None, limit=None):
         """Faz buscas no banco de dados e retorna os resultados."""
         if self.conn is None:
             raise Exception("Conexão não está aberta. Use open_conn() para abrir a conexão.")
@@ -65,6 +65,9 @@ class Database:
             # Substitui os placeholders na cláusula WHERE
             where = where.replace('%s', '{}').format(*placeholders)
             query += f" WHERE {where}"
+
+        if limit is not None:
+            query += f" LIMIT {limit}"
 
         # Caso não haja where_params, utiliza a lista vazia new_where_params
         cursor = self.conn.cursor(dictionary=True)
