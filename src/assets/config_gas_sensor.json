@@ -1,0 +1,20 @@
+{
+    "room_type_probabilities": {
+        "Sala de Estar": 0.000005,
+        "Cozinha": 0.000015,
+        "Quarto": 0.0000001,
+        "Banheiro": 0.0000001,
+        "Lavanderia": 0.0000005,
+        "Escritório": 0.0000001,
+        "Garagem": 0.000005,
+        "Hall de Entrada": 0.0000001,
+        "Varanda": 0.0000001,
+        "Despensa": 0.0000005,
+        "Sótão": 0.0000001,
+        "Sala de Jantar": 0.000005
+    },
+    "food_time_probabilities": {
+        "lunch": 0.0015,
+        "dinner": 0.0015
+    }
+}
