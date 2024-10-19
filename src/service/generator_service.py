@@ -26,7 +26,10 @@ class DataGenerator:
         output_dir = "output"
         os.makedirs(output_dir, exist_ok=True)
 
+        count_series = 1
+
         for sensor in sensors:
+            print(f'Sensor: {count_series}/{len(sensors)}')
             sensor_info = self.sensors_class[sensor["tipo_sensor"].lower()]
             sensor_class = sensor_info["class"]
             interval = sensor_info["interval"]
@@ -44,9 +47,17 @@ class DataGenerator:
 
             sensor_instance = sensor_class(sensor["id"], start_date, config_name)
 
-            with open(f"{output_dir}/{sensor['tipo_sensor'].lower()}_sensor_data.csv", mode="w", newline="") as file:
+            # Verifica se já processou esse tipo de sensor
+            output_file = f"{output_dir}/{sensor['tipo_sensor'].lower()}_sensor_data.csv"
+            # Verifica se o arquivo já existe
+            file_exists = os.path.exists(output_file)
+
+            # Abre o arquivo para escrita/anexação
+            with open(output_file, mode='a', newline="") as file:
                 writer = csv.writer(file)
-                writer.writerow(["sensor_id", "timestamp", "value"])
+                # Se o arquivo não existia, escreva o cabeçalho
+                if not file_exists:
+                    writer.writerow(["sensor_id", "timestamp", "value"])
 
                 current_time = start_date
                 while current_time < end_date:
@@ -56,6 +67,8 @@ class DataGenerator:
                     writer.writerow([sensor_instance.sensor_id, current_time.isoformat(), sensor_instance.value])
 
                     current_time += timedelta(seconds=interval)
+
+            count_series += 1
 
     def _get_sensors(self):
         self.db.open_conn()
@@ -68,7 +81,6 @@ class DataGenerator:
             JOIN residencia r ON r.id = cm.residencia_id  
             JOIN endereco e ON e.id = r.endereco_id  
             JOIN tipo_residencia tr ON tr.id = r.tipo_residencia_id""",
-            limit=5
         )
         self.db.close_conn()
 
@@ -84,43 +96,43 @@ class DataGenerator:
             },
             "gas": {
                 "class": GasSensor,
-                "interval": 5,
+                "interval": 30,
                 "params": "(sensor['tipo_comodo'])",
                 "config": "config_gas_sensor"
             },
             "umidade": {
                 "class": HumiditySensor,
-                "interval": 10,
+                "interval": 30,
                 "params": "(sensor['tipo_comodo'])",
                 "config": "config_humidity_sensor"
             },
             "luminosidade": {
                 "class": LightSensor,
-                "interval": 5,
+                "interval": 30,
                 "params": "(sensor['tipo_comodo'])",
                 "config": "config_light_sensor"
             },
             "movimento": {
                 "class": PresenceSensor,
-                "interval": 5,
+                "interval": 30,
                 "params": "(is_metropoles, sensor['tipo_residencia'], sensor['tipo_comodo'])",
                 "config": "config_presence_sensor"
             },
             "fumaca": {
                 "class": SmokeSensor,
-                "interval": 5,
+                "interval": 30,
                 "params": "(sensor['tipo_comodo'])",
                 "config": "config_smoke_sensor"
             },
             "som": {
                 "class": SoundSensor,
-                "interval": 5,
+                "interval": 30,
                 "params": "(sensor['tipo_comodo'])",
                 "config": "config_sound_sensor"
             },
             "temperatura": {
                 "class": TemperatureSensor,
-                "interval": 10,
+                "interval": 30,
                 "params": "(sensor['tipo_comodo'])",
                 "config": "config_temperature_sensor"
             }

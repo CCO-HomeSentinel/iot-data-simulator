@@ -1,4 +1,5 @@
 from service.generator_service import DataGenerator
+from service.file_service import File
 from config.config import get_config
 from datetime import datetime
 
@@ -12,6 +13,8 @@ def main():
 
     generator = DataGenerator()
     generator.generate_data(start_date, end_date)
+
+    File().convert_to_json()
 
 if __name__ == "__main__":
     main()
