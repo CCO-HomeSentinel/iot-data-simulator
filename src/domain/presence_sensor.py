@@ -17,9 +17,11 @@ class PresenceSensor(Sensor):
         else:
             total_weight += self.config["region_probabilities"]["rural"]
 
-        total_weight += self.config["residence_type_probabilities"][type_residence]
 
-        total_weight += self.config["room_type_probabilities"][room]
+        total_weight += self.config["residence_type_probabilities"].get(type_residence, 0)
+
+
+        total_weight += self.config["room_type_probabilities"].get(room, 0)
 
         total_weight += self._get_time_probability()
 
